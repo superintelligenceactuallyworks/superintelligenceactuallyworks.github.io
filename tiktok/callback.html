@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>TikTok authorization – How Superintelligence Actually Works</title><style>body{font-family:system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;line-height:1.6}code,textarea{font-family:ui-monospace,monospace}textarea{width:100%;height:4.5em}button{padding:6px 14px;margin:4px 0 16px}.err{color:#b00}</style></head><body>
+<h1>TikTok authorization</h1>
+<div id="out"><p>Loading…</p></div>
+<p><a href="../index.html">How Superintelligence Actually Works</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></p>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), o=document.getElementById('out'), h='';
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function box(id,label,val){return '<h2>'+label+'</h2><textarea id="'+id+'" readonly>'+esc(val)+'</textarea><br><button onclick="var t=document.getElementById(\''+id+'\');t.select();navigator.clipboard&&navigator.clipboard.writeText(t.value);this.textContent=\'Copied\'">Copy '+label+'</button>'}
+  if(q.get('error')){h='<p class="err">Authorization failed: '+esc(q.get('error'))+(q.get('error_description')?' – '+esc(q.get('error_description')):'')+'</p>';}
+  if(q.get('code')){
+    h+='<p>Authorization succeeded. Copy the values below back into the publishing tool. The code is single-use and expires in a few minutes.</p>';
+    h+=box('code','code',q.get('code'));
+    h+=box('state','state',q.get('state')||'');
+    if(q.get('scopes')) h+='<p>Granted scopes: <code>'+esc(q.get('scopes'))+'</code></p>';
+    h+=box('full','full URL',location.href);
+  } else if(!h){h='<p>No authorization code in this URL. This page is the OAuth redirect target for our TikTok publishing tool.</p>';}
+  o.innerHTML=h;
+  // remove the code from browser history/address bar
+  if(history.replaceState) history.replaceState(null,'',location.pathname);
+})();
+</script>
+</body></html>
