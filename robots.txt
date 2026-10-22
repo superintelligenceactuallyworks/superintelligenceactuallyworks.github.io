@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://superintelligenceactuallyworks.github.io/sitemap.xml
